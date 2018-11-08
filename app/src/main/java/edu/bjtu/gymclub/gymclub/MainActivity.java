@@ -29,14 +29,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,19 +47,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button signInBtn = (Button) findViewById(R.id.signInBtn);
         Button signUpBtn = (Button) findViewById(R.id.signUpBtn);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText userNameEdit = (EditText)findViewById(R.id.login_username);
-                EditText userPasswordEdit = (EditText)findViewById(R.id.login_password);
+                EditText userNameEdit = (EditText) findViewById(R.id.login_username);
+                EditText userPasswordEdit = (EditText) findViewById(R.id.login_password);
 
                 String username = userNameEdit.getText().toString();
                 String password = userPasswordEdit.getText().toString();
                 String url = "http://192.168.223.1:8080/user";/*在此处改变你的服务器地址*/
-                getCheckFromServer(url,username,password);
+                getCheckFromServer(url, username, password);
 
             }
         });
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent;
                 intent = new Intent();
-                intent.setClass(MainActivity.this,RegisterActivity.class);
+                intent.setClass(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -76,56 +77,49 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 将用户名和密码发送到服务器进行比对，若成功则跳转到app主界面，若错误则刷新UI提示错误登录信息
-     * @param url 服务器地址
+     *
+     * @param url      服务器地址
      * @param username 用户名
      * @param password 密码
      */
-    private void getCheckFromServer(String url,final String username,String password)
-    {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .retryOnConnectionFailure(true)
-                .build();
+    private void getCheckFromServer(String url, final String username, String password) {
+
+        OkHttpClient client = new OkHttpClient.Builder() .addNetworkInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request().newBuilder().addHeader("Connection", "close").build();
+                return chain.proceed(request);
+            }
+        }).build();
         FormBody.Builder formBuilder = new FormBody.Builder();
         formBuilder.add("username", username);
         formBuilder.add("password", password);
         Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
         Call call = client.newCall(request);
-        call.enqueue(new Callback()
-        {
+        call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e)
-            {
-                runOnUiThread(new Runnable()
-                {
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void run()
-                    {
-                        Toast.makeText(MainActivity.this,"服务器错误",Toast.LENGTH_SHORT).show();
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
                     }
                 });
 
             }
 
             @Override
-            public void onResponse(Call call, final Response response) throws IOException
-            {
+            public void onResponse(Call call, final Response response) throws IOException {
                 final String res = response.body().string();
-
-                runOnUiThread(new Runnable()
-                {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         String imageStr = null;
-                        if (res.equals("0"))
-                        {
-                            Toast.makeText(MainActivity.this,"无此账号,请先注册",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(res.equals("1"))
-                        {
-                            Toast.makeText(MainActivity.this,"密码不正确",Toast.LENGTH_SHORT).show();
-                        }
-                        else//成功
+                        if (res.equals("0")) {
+                            Toast.makeText(MainActivity.this, "无此账号,请先注册", Toast.LENGTH_SHORT).show();
+                        } else if (res.equals("1")) {
+                            Toast.makeText(MainActivity.this, "密码不正确", Toast.LENGTH_SHORT).show();
+                        } else//成功
                         {
                             JSONObject jsonObject = null;
 
@@ -137,22 +131,19 @@ public class MainActivity extends AppCompatActivity {
 //
 //                                String imageStr=jsonpet.getString("image");//获取pet对象的参数
 //                                JSONObject jsonpet = jsonObject.getJSONObject();
-                                imageStr=jsonObject.getString("image");
+                                imageStr = jsonObject.getString("image");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            byte[]bitmapArray;
-                            bitmapArray=Base64.decode(imageStr, Base64.DEFAULT);
-                            try
-                            {
+                            byte[] bitmapArray;
+                            bitmapArray = Base64.decode(imageStr, Base64.DEFAULT);
+                            try {
 
 
-                                for(int i=0;i<bitmapArray.length;++i)
-                                {
-                                    if(bitmapArray[i]<0)
-                                    {//调整异常数据
-                                        bitmapArray[i]+=256;
+                                for (int i = 0; i < bitmapArray.length; ++i) {
+                                    if (bitmapArray[i] < 0) {//调整异常数据
+                                        bitmapArray[i] += 256;
                                     }
                                 }
 
@@ -162,14 +153,9 @@ public class MainActivity extends AppCompatActivity {
                                 out.write(bitmapArray);
                                 out.flush();
                                 out.close();
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                            catch (Exception e)
-                            {
-                               e.printStackTrace();
-                            }
-
-
-
 
 
 //                            //将响应数据转化为输入流数据
@@ -192,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Intent intent;
                             intent = new Intent();
-                            intent.setClass(MainActivity.this,MainInterfaceActivity.class);
+                            intent.setClass(MainActivity.this, MainInterfaceActivity.class);
                             startActivity(intent);
                         }
 
@@ -205,16 +191,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar,menu);
+        getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.drawable_menu:
-                Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;
