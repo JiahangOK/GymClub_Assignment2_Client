@@ -2,28 +2,25 @@ package edu.bjtu.gymclub.gymclub;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.JavascriptInterface;
-import android.webkit.JsResult;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import edu.bjtu.gymclub.gymclub.Adapter.RecyclerViewAdapter;
+import edu.bjtu.gymclub.gymclub.Entity.Trainer;
+
+@SuppressLint("ValidFragment")
 public class runFragment extends Fragment {
     private View mView;
     private ViewPager mViewPaper;
@@ -56,28 +57,102 @@ public class runFragment extends Fragment {
             "Image 2",
             "Image 3",
             "Image 4",
-            "Image 5"    };
+            "Image 5"};
 
     private TextView title;
     private ViewPagerAdapter adapter;
     private ScheduledExecutorService scheduledExecutorService;
+    private String jsoninfo;
+
+    private RecyclerView recyclerView;
+    private List<Trainer> trainerList;
+    private RecyclerViewAdapter recyclerViewAdapter;
+
+    @SuppressLint("ValidFragment")
+    public runFragment(String jsoninfo) {
+        this.jsoninfo = jsoninfo;
+    }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView=inflater.inflate(R.layout.fragment_run, null);
+        mView = inflater.inflate(R.layout.fragment_run, null);
         setView();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+
+        recyclerView = (RecyclerView) mView.findViewById(R.id.recyclerView);
+
+        initTrainerData();
+        recyclerViewAdapter = new RecyclerViewAdapter(trainerList, getActivity());
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerViewAdapter);
+
         return mView;
     }
 
+    //加载教练信息
+    private void initTrainerData() {
+        trainerList = new ArrayList<>();
+//        ImageView iv_img = (ImageView)mView.findViewById(R.id.thumbnail_image_1);
+//
+//        //字符串转化为图片
+//        Bitmap bitmap=null;
+//        try {
+//            byte[]bitmapArray;
+//            bitmapArray= Base64.decode(imageStr, Base64.DEFAULT);
+//            bitmap=BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        MainInterfaceActivity mainInterfaceActivity = (MainInterfaceActivity)getActivity();
+//        iv_img.setImageBitmap(bitmap);
+        JSONObject jsonObject = null;
+        String trainer_image = null;
+        String trainer_name = null;
+        String trainer_intro = null;
 
-    private void setView(){
-        mViewPaper = (ViewPager)mView.findViewById(R.id.vp);
+        try {
+            jsonObject = new JSONObject(jsoninfo);
+            JSONArray data = jsonObject.getJSONArray("info");
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject jsonObject1 = data.getJSONObject(i);
+                trainer_image = jsonObject1.getString("trainer_image_url");
+                trainer_name = jsonObject1.getString("trainer_name");
+                trainer_intro = jsonObject1.getString("trainer_intro");
+//                //字符串转化为图片
+//                Bitmap bitmap = null;
+//                try {
+//                    byte[] bitmapArray;
+//                    bitmapArray = Base64.decode(trainer_image_string, Base64.DEFAULT);
+//                    bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+                //添加教练
+                trainerList.add(new Trainer(trainer_name, trainer_image,trainer_intro));
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void setView() {
+        mViewPaper = (ViewPager) mView.findViewById(R.id.vp);
+
+//        //Picasso加载图片
+//        Picasso.with(mainInterfaceActivity).load(bitmap).into(iv_img);
 
         //显示的图片
         images = new ArrayList<ImageView>();
-        for(int i = 0; i < imageIds.length; i++){
+        for (int i = 0; i < imageIds.length; i++) {
             ImageView imageView = new ImageView(getActivity());
             imageView.setBackgroundResource(imageIds[i]);
             images.add(imageView);
@@ -104,6 +179,7 @@ public class runFragment extends Fragment {
                 oldPosition = position;
                 currentItem = position;
             }
+
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
 
@@ -129,10 +205,12 @@ public class runFragment extends Fragment {
             return arg0 == arg1;
 
         }
+
         @Override
         public void destroyItem(ViewGroup view, int position, Object object) {
             view.removeView(images.get(position));
         }
+
         @Override
         public Object instantiateItem(ViewGroup view, int position) {
             view.addView(images.get(position));
@@ -140,16 +218,20 @@ public class runFragment extends Fragment {
         }
     }
 
-    /**     * 利用线程池定时执行动画轮播     */
+    /**
+     * 利用线程池定时执行动画轮播
+     */
     @Override
     public void onStart() {
         super.onStart();
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.scheduleWithFixedDelay(new ViewPageTask(),2,2, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleWithFixedDelay(new ViewPageTask(), 2, 2, TimeUnit.SECONDS);
     }
 
-    /**     * 图片轮播任务     * @author liuyazhuang     *     */
-    private class ViewPageTask implements Runnable{
+    /**
+     * 图片轮播任务     * @author liuyazhuang     *
+     */
+    private class ViewPageTask implements Runnable {
         @Override
         public void run() {
             currentItem = (currentItem + 1) % imageIds.length;
@@ -157,8 +239,10 @@ public class runFragment extends Fragment {
         }
     }
 
-    /**     * 接收子线程传递过来的数据     */
-    private Handler mHandler = new Handler(){
+    /**
+     * 接收子线程传递过来的数据
+     */
+    private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             mViewPaper.setCurrentItem(currentItem);
         }
@@ -167,7 +251,7 @@ public class runFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if(scheduledExecutorService != null){
+        if (scheduledExecutorService != null) {
             scheduledExecutorService.shutdown();
             scheduledExecutorService = null;
         }

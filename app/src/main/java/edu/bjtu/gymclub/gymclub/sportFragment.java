@@ -1,5 +1,6 @@
 package edu.bjtu.gymclub.gymclub;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -14,13 +15,21 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressLint("ValidFragment")
 public class sportFragment extends Fragment {
     private View view;
     private TabLayout my_table;
     private ViewPager viewPager;
+    private String jsoninfo;
 
     //放进集合
     private List<String> tas=new ArrayList<>();
+
+    @SuppressLint("ValidFragment")
+    public sportFragment(String jsoninfo) {
+        this.jsoninfo = jsoninfo;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,7 +54,7 @@ public class sportFragment extends Fragment {
 
 
         //设置适配器  注意：getChildFragmentManager
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
+        viewPager.setAdapter(new MyAdapter(getChildFragmentManager(),jsoninfo));
 
         //建立关联
         my_table.setupWithViewPager(viewPager);
@@ -64,6 +73,12 @@ public class sportFragment extends Fragment {
 
     //写一个适配器
     class MyAdapter extends FragmentPagerAdapter {
+        private String jsoninfo;
+
+        public MyAdapter(FragmentManager fm, String jsoninfo) {
+            super(fm);
+            this.jsoninfo = jsoninfo;
+        }
 
         //得到页面的title,会添加到tabLayout控件上
         @Override
@@ -77,10 +92,10 @@ public class sportFragment extends Fragment {
             //进行判断
             switch (position){
                 case 0:
-                    f=new indexFragment();
+                    f=new indexFragment(jsoninfo);
                     break;
                 case 1:
-                    f=new runFragment();
+                    f=new runFragment(jsoninfo);
                     break;
                 case 2:
                     f=new walkFragment();

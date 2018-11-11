@@ -49,13 +49,15 @@ public class MainInterfaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_interface);
-        initView();
+        Intent intent = getIntent();
+        String jsoninfo = intent.getStringExtra("jsoninfo");
+        initView(jsoninfo);
     }
 
 
-    private void initView(){
+    private void initView(final String jsoninfo){
 
-        manager = getSupportFragmentManager();
+
 
         rb_sport = (RadioButton) findViewById(R.id.rb_sport);
         rb_info = (RadioButton) findViewById(R.id.rb_info);
@@ -66,8 +68,7 @@ public class MainInterfaceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 transaction = manager.beginTransaction();
-                transaction.replace(R.id.content_layout,new sportFragment());
-
+                transaction.replace(R.id.content_layout,new sportFragment(jsoninfo));
                 transaction.commit();
             }
         });
@@ -83,9 +84,9 @@ public class MainInterfaceActivity extends AppCompatActivity {
         });
         rb_sport.setChecked(true);
 
+        manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
-
-        transaction.add(R.id.content_layout,new sportFragment());
+        transaction.add(R.id.content_layout,new sportFragment(jsoninfo));
         rb_sport.setChecked(true);
         transaction.commit();
 
@@ -118,16 +119,6 @@ public class MainInterfaceActivity extends AppCompatActivity {
 
 
     private void initSideView(DrawerLayout drawerLayout){
-//        mDrawerList = (ListView)findViewById(R.id.listview);//listview
-//        menuLists = new ArrayList<String>();//list
-//        menuLists.add("Home");
-//        menuLists.add("Announcement");
-//        menuLists.add("Schedule");
-//        menuLists.add("Coaches");
-//        adapter=new ArrayAdapter<String>(
-//                this,android.R.layout.simple_list_item_1,menuLists
-//        );
-//        mDrawerList.setAdapter(adapter);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener(){
@@ -165,26 +156,6 @@ public class MainInterfaceActivity extends AppCompatActivity {
 
 
         );
-//        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if(menuLists.get(position).equals("Home")){
-//                    mDrawerLayout.closeDrawer(GravityCompat.START);
-//                }
-//                    if(menuLists.get(position).equals("Announcement")){
-//                    Intent intent = new Intent(MainInterfaceActivity.this,AnnounceActivity.class);
-//                    startActivity(intent);
-//                }
-//                if(menuLists.get(position).equals("Schedule")){
-//                    Intent intent = new Intent(MainInterfaceActivity.this,ScheduleActivity.class);
-//                    startActivity(intent);
-//                }
-//                if(menuLists.get(position).equals("Coaches")){
-//                    Intent intent = new Intent(MainInterfaceActivity.this,CoachActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
     }
 
 

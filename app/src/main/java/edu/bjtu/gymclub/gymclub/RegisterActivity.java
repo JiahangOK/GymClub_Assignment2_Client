@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userPasswordConfirm = userPasswordConfirmEdit.getText().toString();
 
 
-                String url = "http://192.168.223.1:8080/register";
+                String url = "http://10.0.2.2:8080/register";
                 registerNameWordToServer(url, userPhoneNumber, userEmail, userName, userPassword);
 
 

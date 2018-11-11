@@ -31,9 +31,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
+@SuppressLint("ValidFragment")
 public class indexFragment extends Fragment {
     private ProgressBar progressBar;
     private WebView webView;
+    private String imageStr;
+
+    @SuppressLint("ValidFragment")
+    public indexFragment(String imageStr) {
+        this.imageStr = imageStr;
+    }
 
     @SuppressLint("JavascriptInterface")
     @Nullable
