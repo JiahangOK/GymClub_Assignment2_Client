@@ -21,10 +21,10 @@
 
         <ImageView
             android:layout_width="289dp"
-            android:layout_height="205dp"
+            android:layout_height="227dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="50px"
-            android:layout_marginTop="100px"
+            android:layout_marginBottom="20px"
+            android:layout_marginTop="50px"
             android:src="@drawable/login_logo"
 
             />
@@ -33,33 +33,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingBottom="10px"
+            android:paddingBottom="5px"
             android:paddingLeft="120px"
             android:paddingRight="120px">
 
             <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:paddingRight="30px"-->
-                <!--android:text="Username"-->
-                <!--android:textSize="50px" />-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingRight="30px"-->
+            <!--android:text="Username"-->
+            <!--android:textSize="50px" />-->
 
             <EditText
                 android:id="@+id/login_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="Username"
-                android:layout_weight="1" />
+                android:textSize="44px"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingBottom="10px"
+            android:paddingBottom="5px"
             android:paddingLeft="120px"
             android:paddingRight="120px"
-            android:paddingTop="50px">
+            >
+            <!--android:paddingTop="20px"-->
+
 
             <!--<TextView-->
                 <!--android:layout_width="wrap_content"-->
@@ -73,38 +77,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:textSize="44px"
                 android:layout_weight="1"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:singleLine="true"
+                />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50px"
-            android:orientation="horizontal">
+            android:layout_marginTop="20px"
+            android:orientation="horizontal"
+            android:paddingLeft="120px"
+            android:paddingRight="120px">
+
 
             <Button
                 android:id="@+id/signInBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="200px"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50px"
+                android:layout_marginRight="125px"
                 android:background="@drawable/btn_nor_down"
                 android:text="Sign In"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
-                android:textSize="40px" />
+                android:textSize="20dp" />
 
+
+            <!--android:layout_marginLeft="50px"-->
             <Button
                 android:id="@+id/signUpBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="200px"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50px"
+                android:layout_marginRight="0px"
                 android:background="@drawable/btn_nor_down"
                 android:text="Sign Up"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
-                android:textSize="40px" />
+                android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 
