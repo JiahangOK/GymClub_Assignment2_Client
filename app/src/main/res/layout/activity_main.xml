@@ -87,36 +87,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20px"
+            android:gravity="center"
+
+            android:layout_marginTop="50px"
             android:orientation="horizontal"
-            android:paddingLeft="120px"
-            android:paddingRight="120px">
+            android:paddingLeft="180px"
+            android:paddingRight="180px">
 
-
-            <Button
-                android:id="@+id/signInBtn"
-                android:layout_width="200px"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="125px"
-                android:background="@drawable/btn_nor_down"
-                android:text="Sign In"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="20dp" />
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:padding="0px">
 
+                <Button
+                    android:id="@+id/signInBtn"
+                    android:layout_width="300px"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
 
-            <!--android:layout_marginLeft="50px"-->
-            <Button
-                android:id="@+id/signUpBtn"
-                android:layout_width="200px"
+                    android:background="@drawable/btn_nor_down"
+                    android:text="Sign In"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="0px"
-                android:background="@drawable/btn_nor_down"
-                android:text="Sign Up"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="20dp" />
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:padding="0px">
+
+
+                <!--android:layout_marginLeft="50px"-->
+                <Button
+                    android:id="@+id/signUpBtn"
+                    android:layout_width="300px"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+
+                    android:background="@drawable/btn_nor_down"
+                    android:text="Sign Up"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
     </LinearLayout>
 
