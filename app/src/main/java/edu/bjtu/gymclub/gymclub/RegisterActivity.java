@@ -77,7 +77,6 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-
                 registerNameWordToServer(url, userPhoneNumber, userEmail, userName, userPassword);
 
 
@@ -109,10 +108,17 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean checkPhoneNumber(String phoneNumber){
         TextInputLayout til_phoneNumber=findViewById(R.id.til_phoneNumber);
         til_phoneNumber.setErrorEnabled(true);
+
+        String telRegex = "[1][34578]\\d{9}" ;
+
         if(TextUtils.isEmpty(phoneNumber)){
             showerror(til_phoneNumber,"Phone number can not be empty!");
             return false;
-        }else{
+        }else if(!phoneNumber.matches(telRegex)){
+            showerror(til_phoneNumber,"Phone number is not in a correct format!");
+            return false;
+        }
+        else{
             til_phoneNumber.setErrorEnabled(false);
             return true;
         }
