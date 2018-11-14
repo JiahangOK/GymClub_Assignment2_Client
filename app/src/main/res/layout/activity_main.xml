@@ -76,13 +76,26 @@
             android:id="@+id/til_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/hint_style">
+            app:hintTextAppearance="@style/hint_style"
+            app:passwordToggleEnabled="true"
+            >
 
-            <EditText
+            <!--<EditText-->
+                <!--android:id="@+id/login_password"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Password"-->
+                <!--android:singleLine="true"-->
+                <!--android:textSize="42px"-->
+                <!--android:layout_marginRight="120px"-->
+                <!--android:layout_marginLeft="120px"/>-->
+
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:textSize="42px"
                 android:layout_marginRight="120px"
