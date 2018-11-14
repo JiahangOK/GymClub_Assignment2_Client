@@ -91,10 +91,12 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean checkEmail(String email){
         TextInputLayout til_email=findViewById(R.id.til_email);
         til_email.setErrorEnabled(true);
+        String strPattern = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
+
         if(TextUtils.isEmpty(email)){
             showerror(til_email,"Email can not be empty!");
             return false;
-        }else if(!email.contains("@")){
+        }else if(!email.matches(strPattern)){
             showerror(til_email,"Email is illegal!");
             return false;
         }else{
