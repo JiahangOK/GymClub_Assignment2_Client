@@ -35,12 +35,9 @@ import java.util.concurrent.TimeUnit;
 public class indexFragment extends Fragment {
     private ProgressBar progressBar;
     private WebView webView;
-    private String imageStr;
 
-    @SuppressLint("ValidFragment")
-    public indexFragment(String imageStr) {
-        this.imageStr = imageStr;
-    }
+
+
 
     @SuppressLint("JavascriptInterface")
     @Nullable

@@ -42,7 +42,7 @@ public class sportFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        tas.add("index");
+
         tas.add("Running");
         tas.add("Walking");
         tas.add("Riding");
@@ -51,6 +51,7 @@ public class sportFragment extends Fragment {
         tas.add("Lon Tennis");
         tas.add("Tennis");
         tas.add("Volleyball");
+        tas.add("index");
 
 
         //设置适配器  注意：getChildFragmentManager
@@ -91,32 +92,33 @@ public class sportFragment extends Fragment {
             Fragment f=null;
             //进行判断
             switch (position){
+
                 case 0:
-                    f=new indexFragment(jsoninfo);
-                    break;
-                case 1:
                     f=new runFragment(jsoninfo);
                     break;
-                case 2:
+                case 1:
                     f=new walkFragment();
                     break;
-                case 3:
+                case 2:
                     f=new rideFragment();
                     break;
-                case 4:
+                case 3:
                     f=new boxingFragment();
                     break;
-                case 5:
+                case 4:
                     f=new footballFragment();
                     break;
-                case 6:
+                case 5:
                     f=new lonTennisFragment();
                     break;
-                case 7:
+                case 6:
                     f=new tennisFragment();
                     break;
-                case 8:
+                case 7:
                     f=new volleyballFragment();
+                    break;
+                case 8:
+                    f=new indexFragment();
                     break;
 
             }
