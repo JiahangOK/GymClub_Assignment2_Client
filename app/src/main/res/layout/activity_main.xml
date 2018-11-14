@@ -29,60 +29,96 @@
 
             />
 
-        <LinearLayout
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingBottom="5px"-->
+            <!--android:paddingLeft="120px"-->
+            <!--android:paddingRight="120px">-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:paddingRight="30px"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="Username"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="50px" />&ndash;&gt;-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/login_username"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:hint="Username"-->
+                <!--android:textSize="44px"-->
+                <!--android:singleLine="true"/>-->
+        <!--</LinearLayout>-->
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingBottom="5px"
-            android:paddingLeft="120px"
-            android:paddingRight="120px">
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:paddingRight="30px"-->
-            <!--android:text="Username"-->
-            <!--android:textSize="50px" />-->
+            app:hintTextAppearance="@style/hint_style">
 
             <EditText
                 android:id="@+id/login_username"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:hint="Username"
-                android:textSize="44px"
-                android:singleLine="true"/>
-        </LinearLayout>
+                android:singleLine="true"
+                android:textSize="42px"
+                android:layout_marginRight="120px"
+                android:layout_marginLeft="120px"/>
 
-        <LinearLayout
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingBottom="5px"
-            android:paddingLeft="120px"
-            android:paddingRight="120px"
-            >
-            <!--android:paddingTop="20px"-->
-
-
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:paddingRight="30px"-->
-                <!--android:text="Password"-->
-                <!--android:textSize="50px" />-->
+            app:hintTextAppearance="@style/hint_style">
 
             <EditText
                 android:id="@+id/login_password"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:textSize="44px"
-                android:layout_weight="1"
-                android:inputType="textPassword"
                 android:singleLine="true"
-                />
-        </LinearLayout>
+                android:textSize="42px"
+                android:layout_marginRight="120px"
+                android:layout_marginLeft="120px"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingBottom="5px"-->
+            <!--android:paddingLeft="120px"-->
+            <!--android:paddingRight="120px"-->
+            <!--&gt;-->
+            <!--&lt;!&ndash;android:paddingTop="20px"&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingRight="30px"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Password"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="50px" />&ndash;&gt;-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/login_password"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Password"-->
+                <!--android:textSize="44px"-->
+                <!--android:layout_weight="1"-->
+                <!--android:inputType="textPassword"-->
+                <!--android:singleLine="true"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
