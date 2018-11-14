@@ -126,8 +126,9 @@ public class MainActivity extends AppCompatActivity {
                             intent = new Intent();
                             intent.setClass(MainActivity.this, MainInterfaceActivity.class);
                             intent.putExtra("jsoninfo",jsoninfo);
-                            closeDialog();
+
                             startActivity(intent);
+                            closeDialog();
                         }
 
                     }

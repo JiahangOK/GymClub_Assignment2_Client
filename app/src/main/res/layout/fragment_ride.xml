@@ -30,7 +30,7 @@
                 tools:ignore="UselessParent">
 
                 <ImageView
-                    android:id="@+id/thumbnail_image"
+                    android:id="@+id/trainer_image"
                     style="@style/cardImageViewStyle"
                     android:src="@drawable/p1"
                     android:layout_height="100dp"
@@ -38,12 +38,12 @@
                     android:contentDescription="@string/news_preview_image"/>
 
                 <TextView
-                    android:id="@+id/question_title"
+                    android:id="@+id/trainer_name"
                     android:text="This is the title."
                     style="@style/cardQuestionTitleStyle"/>
 
                 <TextView
-                    android:id="@+id/daily_title"
+                    android:id="@+id/trainer_info"
                     android:text="This is the content.This is the content.This is the content.This is the content."
                     style="@style/baseCardTextStyle"/>
 
@@ -70,7 +70,7 @@
                 tools:ignore="UselessParent">
 
                 <ImageView
-                    android:id="@+id/thumbnail_image"
+                    android:id="@+id/trainer_image"
                     style="@style/cardImageViewStyle"
                     android:src="@drawable/p2"
                     android:layout_height="100dp"
@@ -78,12 +78,12 @@
                     android:contentDescription="@string/news_preview_image"/>
 
                 <TextView
-                    android:id="@+id/question_title"
+                    android:id="@+id/trainer_name"
                     android:text="This is the title."
                     style="@style/cardQuestionTitleStyle"/>
 
                 <TextView
-                    android:id="@+id/daily_title"
+                    android:id="@+id/trainer_info"
                     android:text="This is the content.This is the content.This is the content.This is the content."
                     style="@style/baseCardTextStyle"/>
 
@@ -110,7 +110,7 @@
                 tools:ignore="UselessParent">
 
                 <ImageView
-                    android:id="@+id/thumbnail_image"
+                    android:id="@+id/trainer_image"
                     style="@style/cardImageViewStyle"
                     android:src="@drawable/p3"
                     android:layout_height="100dp"
@@ -118,12 +118,12 @@
                     android:contentDescription="@string/news_preview_image"/>
 
                 <TextView
-                    android:id="@+id/question_title"
+                    android:id="@+id/trainer_name"
                     android:text="This is the title."
                     style="@style/cardQuestionTitleStyle"/>
 
                 <TextView
-                    android:id="@+id/daily_title"
+                    android:id="@+id/trainer_info"
                     android:text="This is the content.This is the content.This is the content.This is the content."
                     style="@style/baseCardTextStyle"/>
 
@@ -151,7 +151,7 @@
                 tools:ignore="UselessParent">
 
                 <ImageView
-                    android:id="@+id/thumbnail_image"
+                    android:id="@+id/trainer_image"
                     style="@style/cardImageViewStyle"
                     android:src="@drawable/p4"
                     android:layout_height="100dp"
@@ -159,12 +159,12 @@
                     android:contentDescription="@string/news_preview_image"/>
 
                 <TextView
-                    android:id="@+id/question_title"
+                    android:id="@+id/trainer_name"
                     android:text="This is the title."
                     style="@style/cardQuestionTitleStyle"/>
 
                 <TextView
-                    android:id="@+id/daily_title"
+                    android:id="@+id/trainer_info"
                     android:text="This is the content.This is the content.This is the content.This is the content."
                     style="@style/baseCardTextStyle"/>
 
@@ -191,7 +191,7 @@
                 tools:ignore="UselessParent">
 
                 <ImageView
-                    android:id="@+id/thumbnail_image"
+                    android:id="@+id/trainer_image"
                     style="@style/cardImageViewStyle"
                     android:src="@drawable/p5"
                     android:layout_height="100dp"
@@ -199,12 +199,12 @@
                     android:contentDescription="@string/news_preview_image"/>
 
                 <TextView
-                    android:id="@+id/question_title"
+                    android:id="@+id/trainer_name"
                     android:text="This is the title."
                     style="@style/cardQuestionTitleStyle"/>
 
                 <TextView
-                    android:id="@+id/daily_title"
+                    android:id="@+id/trainer_info"
                     android:text="This is the content.This is the content.This is the content.This is the content."
                     style="@style/baseCardTextStyle"/>
 
